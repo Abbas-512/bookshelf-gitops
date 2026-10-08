@@ -1,5 +1,5 @@
 api:
-  replicaCount: 5
+  replicaCount: 3
 
   image:
     repository: eval2-api
