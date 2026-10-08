@@ -1,0 +1,57 @@
+api:
+  replicaCount: 3
+
+  image:
+    repository: eval2-api
+    tag: v1
+    pullPolicy: IfNotPresent
+
+  service:
+    type: NodePort
+    port: 8000
+    targetPort: 8000
+    nodePort: 30080
+postgres:
+  image:
+    repository: postgres
+    tag: "16"
+
+  replicaCount: 1
+
+  storage:
+    size: 1Gi
+
+  service:
+    port: 5432
+
+  database: bookshelf
+  username: postgres
+  password: postgres
+
+redis:
+  image:
+    repository: redis
+    tag: "7"
+
+  replicaCount: 1
+
+  service:
+    port: 6379
+
+config:
+  algorithm: HS256
+  accessTokenExpiry: "30"
+  refreshTokenExpiry: "7"
+  windowsScreen: "60"
+  accessCounter: "10"
+  adminUsername: admin
+  adminEmail: admin@example.com
+  redisHost: redis
+  redisPort: "6379"
+  postgresUser: postgres
+  postgresDB: bookshelf
+
+secrets:
+  secretKey: "a3c1970caf9649863246684b43f1f6077f3925f5b71d0351b59a9bb4ce3b7"
+  adminPassword: "admin123"
+  postgresPassword: "postgres"
